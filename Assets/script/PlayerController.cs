@@ -5,13 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float acceleration = 10.0f;
-    [SerializeField]
-    private float airAcceleration = 5.0f;
-    [SerializeField]
-    private float jumpForce = 10.0f;
-    
+
+    [SerializeField] private float speed = 8f;
+    [SerializeField] private float jumpForce = 10f;
+
     private float horizontalInput;
     
     private Rigidbody2D rb;
@@ -27,18 +24,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         this.horizontalInput = Input.GetAxisRaw("Horizontal");
-        
+
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+
     }
 
     void FixedUpdate()
     {
-        float acceleration = IsGrounded() ? this.acceleration : this.airAcceleration;
-        
-        rb.velocity = new Vector2(horizontalInput * acceleration, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
     }
     
     private bool IsGrounded()
