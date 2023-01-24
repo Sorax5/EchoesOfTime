@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         bool jump = IsGrounded();
+        
+        playerAnimator.SetBool("isFalling", !jump);
 
         greenBox = Physics2D.OverlapBox(new Vector2(transform.position.x + (greenXOffset * transform.localScale.x), transform.position.y + greenYOffset), new Vector2(greenXSize, greenYSize), 0f, groundMask);
         redBox = Physics2D.OverlapBox(new Vector2(transform.position.x + (redXOffset * transform.localScale.x), transform.position.y + redYOffset), new Vector2(redXSize, redYSize), 0f, groundMask);
@@ -95,8 +97,8 @@ public class PlayerController : MonoBehaviour
     
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, coll.bounds.extents.y + 0.3f);
-        Debug.DrawRay(transform.position, Vector2.down * (coll.bounds.extents.y + 0.1f), Color.red);
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, Vector2.down, coll.bounds.extents.y + 0.5f);
+        Debug.DrawRay(transform.position, Vector2.down * (coll.bounds.extents.y + 0.5f), Color.red);
         return raycastHit2D.collider != null;
     }
 

@@ -25,6 +25,8 @@ public class RewindController : Chronometer
     
     private List<GameObject> remanentObjects = new List<GameObject>();
     
+    private Vector3 lastPosition;
+    
     [SerializeField]
     private Slider slider;
 
@@ -35,6 +37,7 @@ public class RewindController : Chronometer
         rb = GetComponent<Rigidbody2D>();
         slider.maxValue = MaxTime;
         slider.value = Time;
+        lastPosition = transform.position;
         
     }
 
@@ -109,6 +112,13 @@ public class RewindController : Chronometer
     private void record()
     {
         Vector3 position = transform.position;
+        
+        // verifying if position & last position are the same
+        if (position == lastPosition)
+        {
+            return;
+        }
+        
         if (positions.Count % 10 == 0)
         {
             // create copy of the player without children & components
@@ -130,12 +140,11 @@ public class RewindController : Chronometer
             {
                 Destroy(child.gameObject);
             }
-            
-            // set z layer -1 to be behind the player
-            remanent.GetComponent<SpriteRenderer>().sortingOrder = 2;
             remanentObjects.Add(remanent);   
         }
         positions.Push(position);
+        
+        lastPosition = position;
         
     }
     
