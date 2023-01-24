@@ -17,9 +17,7 @@ public class RewindController : Chronometer
     private bool isRecording = false;
 
     private PlayerController playerController;
-    
-    private TrailRenderer trailRenderer;
-    
+
     private Rigidbody2D rb;
     
     [SerializeField]
@@ -33,7 +31,6 @@ public class RewindController : Chronometer
     private void Awake()
     {
         positions = new Stack<Vector3>();
-        trailRenderer = GetComponent<TrailRenderer>();
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         slider.maxValue = MaxTime;
@@ -44,14 +41,12 @@ public class RewindController : Chronometer
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !isRewinding && !isRecording)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            StartChronometer();
-        }
-        
-        if (Input.GetKeyUp(KeyCode.Return) && isRecording)
-        {
-            StopChronometer();
+            if(!isRecording && !isRewinding)
+                StartChronometer();
+            else if(isRecording)
+                StopChronometer();
         }
     }
 
@@ -167,12 +162,25 @@ public class RewindController : Chronometer
     
     public override void End()
     {
+        if(Time != MaxTime)
+            startRewind();
+        else
+            explodRemanent();
         stopRecord();
-        startRewind();
     }
 
     public override void Begin()
     {
+        positions.Clear();
         startRecord();
+    }
+
+    private void explodRemanent()
+    {
+        for (var i = 0; i < remanentObjects.Count; i++)
+        {
+            GameObject remanent = remanentObjects[i];
+            Destroy(remanent, 1);
+        }
     }
 }
