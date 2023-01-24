@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -174,9 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ed3028e03ee9d4f9be568cf1301f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: []
-  textUI: {fileID: 0}
-  delay: 0.1
+  texts:
+  - .....
+  - ............
+  - Ou suis-je ?
+  - Une montre ?
+  textUI: {fileID: 784404510}
+  delay: 0.3
+  animator: {fileID: 1290412672}
 --- !u!114 &784404510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Il \xE9tait une fois une petite fille"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
