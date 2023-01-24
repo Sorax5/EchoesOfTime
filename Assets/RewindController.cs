@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Vector2 = System.Numerics.Vector2;
 
-public class RewindController : MonoBehaviour
+public class RewindController : Chronometer
 {
 
     private Stack<Vector3> positions;
@@ -14,15 +15,14 @@ public class RewindController : MonoBehaviour
     [SerializeField]
     private bool isRecording = false;
 
-    [SerializeField]
-    private int time = 0;
-    private int maxTime = 1000;
-    
     private PlayerController playerController;
     
     private TrailRenderer trailRenderer;
     
     private Rigidbody2D rb;
+    
+    [SerializeField]
+    private RewindImage rewindImage;
 
     private void Awake()
     {
@@ -35,20 +35,10 @@ public class RewindController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        eachIteration();
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            startRecord();
-        }
-
-        if (isRecording)
-        {
-            time++;
-        }
-        
-        if(time >= maxTime)
-        {
-            stopRecord();
-            startRewind();
+            StartChronometer();
         }
     }
 
@@ -70,7 +60,7 @@ public class RewindController : MonoBehaviour
         isRewinding = true;
         rb.isKinematic = true;
         playerController.enabled = false;
-        
+        rewindImage.startRewind();
     }
     
     private void stopRewind()
@@ -78,17 +68,19 @@ public class RewindController : MonoBehaviour
         isRewinding = false;
         rb.isKinematic = false;
         playerController.enabled = true;
+        rewindImage.stopRewind();
     }
     
     private void startRecord()
     {
         isRecording = true;
-        time = 0;
+        rewindImage.startRecord();
     }
     
     private void stopRecord()
     {
         isRecording = false;
+        rewindImage.stopRecord();
     }
 
     private void record()
@@ -106,5 +98,16 @@ public class RewindController : MonoBehaviour
         {
             stopRewind();
         }
+    }
+    
+    public override void End()
+    {
+        stopRecord();
+        startRewind();
+    }
+
+    public override void Begin()
+    {
+        startRecord();
     }
 }
