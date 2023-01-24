@@ -23,12 +23,14 @@ public class Energy
         }
     }
 
-    public void TryChangeTemporality()
+    public bool TryChangeTemporality()
     {
         if(energyAmount == ENERGY_MAX)
         {
             energyAmount -= ENERGY_MAX;
+            return true;
         }
+        return false;
     }
 
     public float GetEnergyNormalized()

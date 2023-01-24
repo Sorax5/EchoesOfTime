@@ -11,14 +11,17 @@ public class TemporalityChange : MonoBehaviour
     private GameObject futurTemporality;
 
     [SerializeField]
-    private GameObject energyBar;
+    private EnergyBar energybar;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            SwitchTemporality();
+            if (energybar.Energy.TryChangeTemporality())
+            {
+                SwitchTemporality();
+            }
         }
     }
 

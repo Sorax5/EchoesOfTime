@@ -8,6 +8,11 @@ public class EnergyBar : MonoBehaviour
     private Energy energy;
     private Image barImage;
 
+    public Energy Energy
+    {
+        get => energy;
+    }
+
     private void Awake()
     {
         barImage = transform.Find("bar").GetComponent<Image>();
