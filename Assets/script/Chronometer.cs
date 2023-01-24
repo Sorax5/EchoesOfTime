@@ -24,10 +24,6 @@ public abstract class Chronometer : MonoBehaviour
     {
         if (start)
         {
-            if (time == 0)
-            {
-                Begin();
-            }
             if(time >= maxTime)
             {
                 End();
@@ -44,7 +40,9 @@ public abstract class Chronometer : MonoBehaviour
 
     public void StartChronometer()
     {
+        time = 0;
         start = true;
+        Begin();
     }
     
     public void StopChronometer()

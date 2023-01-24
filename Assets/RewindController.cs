@@ -30,13 +30,14 @@ public class RewindController : Chronometer
         trailRenderer = GetComponent<TrailRenderer>();
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         eachIteration();
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && !isRewinding && !isRecording)
         {
             StartChronometer();
         }
@@ -92,7 +93,9 @@ public class RewindController : Chronometer
     {
         if (positions.Count > 0)
         {
-            transform.position = positions.Pop();
+            // smooth rewind
+            //move to the last position
+            rb.MovePosition(positions.Pop());
         }
         else
         {

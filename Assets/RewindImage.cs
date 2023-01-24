@@ -24,10 +24,14 @@ public class RewindImage : MonoBehaviour
     private Image rewindImage;
     private Image recordImage;
     
+    [SerializeField]
+    private ParticleSystem rewindParticles;
+
     private void Awake()
     {
         rewindImage = rewind.GetComponent<Image>();
         recordImage = record.GetComponent<Image>();
+        rewindParticles.Stop();
     }
     
     public void startRewind()
@@ -38,11 +42,13 @@ public class RewindImage : MonoBehaviour
     public void stopRewind()
     {
         rewindAnimator.SetTrigger("end");
+        rewindParticles.Stop();
     }
 
     public void startRecord()
     {
         recordAnimator.SetTrigger("start");
+        rewindParticles.Play();
     }
     
     public void stopRecord()
