@@ -19,6 +19,16 @@ public abstract class Chronometer : MonoBehaviour
     {
         get => start;
     }
+    
+    public int Time
+    {
+        get => time;
+    }
+    
+    public int MaxTime
+    {
+        get => maxTime;
+    }
 
     public void eachIteration()
     {
@@ -49,5 +59,6 @@ public abstract class Chronometer : MonoBehaviour
     {
         start = false;
         time = 0;
+        End();
     }
 }

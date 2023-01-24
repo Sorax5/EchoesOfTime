@@ -14,6 +14,9 @@ public class TemporalityChange : MonoBehaviour
 
     [SerializeField]
     private EnergyBar energybar;
+    
+    [SerializeField]
+    private Animator rewindAnimator;
 
     // Update is called once per frame
     void Update()
@@ -23,6 +26,7 @@ public class TemporalityChange : MonoBehaviour
             energybar.DumpBar();
             if (Input.GetKeyDown(KeyCode.RightShift) || energybar.GetEnergy().IsEmpty())
             {
+                rewindAnimator.SetTrigger("end");
                 SwitchTemporality();
             }
         }
@@ -31,6 +35,7 @@ public class TemporalityChange : MonoBehaviour
             energybar.RefillBar();
             if (Input.GetKeyDown(KeyCode.RightShift) && energybar.GetEnergy().TryChangeTemporality())
             {
+                rewindAnimator.SetTrigger("start");
                 SwitchTemporality();
             }
         }
