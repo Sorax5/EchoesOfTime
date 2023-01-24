@@ -137,7 +137,7 @@ public class RewindController : Chronometer
             }
             
             // set z layer -1 to be behind the player
-            remanent.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            remanent.GetComponent<SpriteRenderer>().sortingOrder = 0;
             remanentObjects.Add(remanent);   
         }
         positions.Push(position);

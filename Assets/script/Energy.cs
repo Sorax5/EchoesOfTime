@@ -48,4 +48,9 @@ public class Energy
             energyAmount = Mathf.Clamp(energyAmount, 0f, ENERGY_MAX);
         }
     }
+    
+    public bool IsFull()
+    {
+        return energyAmount == ENERGY_MAX;
+    }
 }

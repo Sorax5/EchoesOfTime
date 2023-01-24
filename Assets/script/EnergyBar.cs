@@ -7,6 +7,11 @@ public class EnergyBar : MonoBehaviour
 {
     private Energy energy;
     private Image barImage;
+    
+    public Image BarImage
+    {
+        get => barImage;
+    }
 
     private void Awake()
     {

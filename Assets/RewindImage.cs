@@ -12,12 +12,6 @@ public class RewindImage : MonoBehaviour
         get => rewind;
     }
 
-    [SerializeField] private GameObject record;
-    public GameObject Record
-    {
-        get => record;
-    }
-    
     [SerializeField] private Animator rewindAnimator;
 
     private Image rewindImage;

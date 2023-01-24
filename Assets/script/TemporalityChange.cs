@@ -39,6 +39,16 @@ public class TemporalityChange : MonoBehaviour
                 SwitchTemporality();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.RightShift) && !energybar.GetEnergy().IsFull())
+        {
+            energybar.BarImage.color = Color.red;
+        }
+        
+        if (Input.GetKeyUp(KeyCode.RightShift))
+        {
+            energybar.BarImage.color = new Color(0.2627451F, 0.2235294F,0.4509804F);
+        }
     }
 
     private void SwitchTemporality()
