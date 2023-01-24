@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangePos()
     {
-        transform.position = new Vector2(transform.position.x + (0.5f * transform.localScale.x), transform.position.y + 3f);
+        transform.position = new Vector2(transform.position.x, transform.position.y + 3f);
         rb.gravityScale = startingGrav;
         isGrabbing = false;
     }
