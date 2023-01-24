@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TypeWritter : MonoBehaviour
 {
     
     [SerializeField]
-    private List<String> text;
+    private List<String> texts;
     
     [SerializeField]
-    private Text textUI;
+    private TextMeshProUGUI textUI;
     
     [SerializeField]
     private float delay = 0.1f;
+    
+    [SerializeField]
+    private Animator animator;
 
     private int index = 0;
     
@@ -23,20 +28,35 @@ public class TypeWritter : MonoBehaviour
     void Awake()
     {
         textUI.text = null;
-    }
-
-    private void FixedUpdate()
-    {
-        
-        
+        index = 0;
+        StartCoroutine(ShowLetterByLetter(texts[index]));
     }
 
     IEnumerator ShowLetterByLetter(String text)
     {
+        yield return new WaitForSeconds(1f);
         for (var i = 0; i < text.Length; i++)
         {
             textUI.text += text[i];
             yield return new WaitForSeconds(delay);
         }
+        yield return new WaitForSeconds(1.5f);
+        textUI.text = null;
+        index++;
+        if (index < texts.Count)
+        {
+            StartCoroutine(ShowLetterByLetter(texts[index]));
+        }
+        else
+        {
+            animator.SetTrigger("start");
+            StartCoroutine(changeScene());
+        }
+    }
+
+    IEnumerator changeScene()
+    {
+        yield return new WaitForSeconds(8F);
+        SceneManager.LoadScene(0);
     }
 }
