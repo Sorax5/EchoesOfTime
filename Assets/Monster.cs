@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    [SerializeField]
-    private Transform castPoint;
+    // The player GameObject
+    public Transform player;
+    // The maximum distance for the line of sight
+    public float maxDistance;
 
-    // Update is called once per frame
+    //// Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(castPoint.position, Vector2.right * new Vector2(0f, 0f));
-        if(hit.collider != null)
+        // Calculate the distance between the enemy and the player
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        // Check if the player is within the maximum distance for the line of sight
+        if (distance < maxDistance)
         {
-            Debug.DrawRay(castPoint.position, Vector2.right * hit.distance * new Vector2(0f, 0f), Color.red);
-            if (hit.collider.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("I SEE YOU!");
-            }
+            Debug.DrawLine(transform.position, player.position, Color.red);
         }
     }
 }
