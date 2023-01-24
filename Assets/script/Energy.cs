@@ -7,14 +7,16 @@ public class Energy
 
     private float energyAmount;
     private float energyRegenAmount;
+    private float energyDumpAmount;
 
     public Energy()
     {
         energyAmount = 0;
         energyRegenAmount = 10f;
+        energyDumpAmount = 15f;
     }
 
-    public void Update()
+    public void RegainEnergy()
     {
         if (energyAmount < ENERGY_MAX)
         {
@@ -25,16 +27,25 @@ public class Energy
 
     public bool TryChangeTemporality()
     {
-        if(energyAmount == ENERGY_MAX)
-        {
-            energyAmount -= ENERGY_MAX;
-            return true;
-        }
-        return false;
+        return energyAmount == ENERGY_MAX;
+    }
+
+    public bool IsEmpty()
+    {
+        return energyAmount == 0;
     }
 
     public float GetEnergyNormalized()
     {
         return energyAmount / ENERGY_MAX;
+    }
+
+    public void ConsumeEnergy()
+    {
+        if (energyAmount > 0)
+        {
+            energyAmount -= energyDumpAmount * Time.deltaTime; ;
+            energyAmount = Mathf.Clamp(energyAmount, 0f, ENERGY_MAX);
+        }
     }
 }

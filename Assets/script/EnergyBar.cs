@@ -8,11 +8,6 @@ public class EnergyBar : MonoBehaviour
     private Energy energy;
     private Image barImage;
 
-    public Energy Energy
-    {
-        get => energy;
-    }
-
     private void Awake()
     {
         barImage = transform.Find("bar").GetComponent<Image>();
@@ -20,10 +15,22 @@ public class EnergyBar : MonoBehaviour
         energy = new Energy();
     }
 
-    private void Update()
+    public void RefillBar()
     {
-        energy.Update();
+        energy.RegainEnergy();
 
         barImage.fillAmount = energy.GetEnergyNormalized();
+    }
+
+    public void DumpBar()
+    {
+        energy.ConsumeEnergy();
+
+        barImage.fillAmount = energy.GetEnergyNormalized();
+    }
+
+    public Energy GetEnergy()
+    {
+        return energy;
     }
 }

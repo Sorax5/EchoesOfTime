@@ -6,9 +6,11 @@ public class TemporalityChange : MonoBehaviour
 {
     [SerializeField]
     private GameObject pastTemporality;
+    private bool isPast = false;
 
     [SerializeField]
-    private GameObject futurTemporality;
+    private GameObject futureTemporality;
+    private bool isFuture = true;
 
     [SerializeField]
     private EnergyBar energybar;
@@ -16,9 +18,18 @@ public class TemporalityChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        if (isPast)
         {
-            if (energybar.Energy.TryChangeTemporality())
+            energybar.DumpBar();
+            if (Input.GetKeyDown(KeyCode.RightShift) || energybar.GetEnergy().IsEmpty())
+            {
+                SwitchTemporality();
+            }
+        }
+        if (isFuture)
+        {
+            energybar.RefillBar();
+            if (Input.GetKeyDown(KeyCode.RightShift) && energybar.GetEnergy().TryChangeTemporality())
             {
                 SwitchTemporality();
             }
@@ -27,15 +38,10 @@ public class TemporalityChange : MonoBehaviour
 
     private void SwitchTemporality()
     {
-        if (pastTemporality.activeSelf == true)
-        {
-            futurTemporality.SetActive(true);
-            pastTemporality.SetActive(false);
-        }
-        else
-        {
-            pastTemporality.SetActive(true);
-            futurTemporality.SetActive(false);
-        }
+        futureTemporality.SetActive(isPast);
+        pastTemporality.SetActive(isFuture);
+
+        isFuture = futureTemporality.activeSelf;
+        isPast = pastTemporality.activeSelf;
     }
 }
