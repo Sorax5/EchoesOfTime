@@ -1519,6 +1519,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   jumpForce: 4
+  redXOffset: 0
+  redYOffset: 2.5
+  redXSize: 1
+  redYSize: 0.05
+  greenXOffset: 0
+  greenYOffset: 2
+  greenXSize: 1
+  greenYSize: 0.05
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &717755612
 MonoBehaviour:
   m_ObjectHideFlags: 0
