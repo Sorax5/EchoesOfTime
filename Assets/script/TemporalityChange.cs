@@ -10,6 +10,9 @@ public class TemporalityChange : MonoBehaviour
     [SerializeField]
     private GameObject futurTemporality;
 
+    [SerializeField]
+    private GameObject energyBar;
+
     // Update is called once per frame
     void Update()
     {
