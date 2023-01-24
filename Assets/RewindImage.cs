@@ -26,32 +26,29 @@ public class RewindImage : MonoBehaviour
     
     [SerializeField]
     private ParticleSystem rewindParticles;
-    [SerializeField]
-    private ParticleSystem recordParticles;
-    
+
     private void Awake()
     {
         rewindImage = rewind.GetComponent<Image>();
         recordImage = record.GetComponent<Image>();
         rewindParticles.Stop();
-        recordParticles.Stop();
     }
     
     public void startRewind()
     {
         rewindAnimator.SetTrigger("start");
-        rewindParticles.Play();
     }
     
     public void stopRewind()
     {
         rewindAnimator.SetTrigger("end");
+        rewindParticles.Stop();
     }
 
     public void startRecord()
     {
         recordAnimator.SetTrigger("start");
-        recordParticles.Play();
+        rewindParticles.Play();
     }
     
     public void stopRecord()
