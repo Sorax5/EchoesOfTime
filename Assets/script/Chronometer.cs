@@ -28,6 +28,7 @@ public abstract class Chronometer : MonoBehaviour
     public int MaxTime
     {
         get => maxTime;
+        set => maxTime = value;
     }
 
     public void eachIteration()
@@ -36,11 +37,14 @@ public abstract class Chronometer : MonoBehaviour
         {
             if(time >= maxTime)
             {
-                End();
                 start = false;
                 time = 0;
+                End();
             }
-            time++;
+            else
+            {
+                time++;
+            }
         }
     }
 
