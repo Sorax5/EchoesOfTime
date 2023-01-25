@@ -14,6 +14,6 @@ public class BackToMenu : MonoBehaviour
     IEnumerator returnToMenu()
     {
         yield return new WaitForSeconds(33);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(0);
     }
 }
