@@ -57,6 +57,6 @@ public class TypeWritter : MonoBehaviour
     IEnumerator changeScene()
     {
         yield return new WaitForSeconds(8F);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 }

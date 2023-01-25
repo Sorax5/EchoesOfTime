@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
     public void LoadGameScene()
     {
         // load scene with index
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         
     }
 }
