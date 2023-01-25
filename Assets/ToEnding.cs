@@ -10,7 +10,7 @@ public class ToEnding : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(0);
         }
         
     }
