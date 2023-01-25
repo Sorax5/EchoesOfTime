@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class Monster : Chronometer
@@ -11,7 +12,10 @@ public class Monster : Chronometer
     private bool isChasing = false;
     
     [SerializeField]
-    private Tilemap tilemap;
+    private Tilemap futureTile;
+    
+    [SerializeField]
+    private Tilemap pastTile;
     
     [SerializeField]
     private List<GameObject> inField = new List<GameObject>();
@@ -36,16 +40,19 @@ public class Monster : Chronometer
     //// Update is called once per frame
     void FixedUpdate()
     {
-        
         eachIteration();
-
         if (isChasing)
         {
             animator.SetTrigger("active");
-            // check if the player toucn a tile in the tilemap
+            // check if the player toucn a tile in the futureTile
             foreach (var o in inField)
             {
-                if (!tilemap.HasTile(tilemap.WorldToCell(o.transform.position)))
+                if (!futureTile.HasTile(futureTile.WorldToCell(o.transform.position)) && futureTile.isActiveAndEnabled)
+                {
+                    checkPointsManager.respawn();
+                }
+                
+                if (!pastTile.HasTile(pastTile.WorldToCell(o.transform.position)) && pastTile.isActiveAndEnabled)
                 {
                     checkPointsManager.respawn();
                 }
