@@ -177,7 +177,7 @@ MonoBehaviour:
   texts:
   - .....
   - ............
-  - Ou suis-je ?
+  - "O\xF9 suis-je?"
   - Une montre ?
   textUI: {fileID: 784404510}
   delay: 0.3
