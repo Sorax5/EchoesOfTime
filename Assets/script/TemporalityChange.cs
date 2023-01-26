@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Cinemachine;
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class TemporalityChange : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject pastTemporality;
-    private bool isPast = false;
-
-    [SerializeField]
-    private GameObject futureTemporality;
     private bool isFuture = true;
 
     [SerializeField]
@@ -18,10 +13,20 @@ public class TemporalityChange : MonoBehaviour
     [SerializeField]
     private Animator rewindAnimator;
 
+    [SerializeField]
+    private CinemachineConfiner2D cinemachineConfiner;
+    [SerializeField]
+    private Collider2D colliderPast;
+    [SerializeField]
+    private Collider2D colliderFuture;
+
+    [SerializeField]
+    private PlayerController playerController;
+
     // Update is called once per frame
     void Update()
     {
-        if (isPast)
+        if (!isFuture)
         {
             energybar.DumpBar();
             if (Input.GetKeyDown(KeyCode.RightShift) || energybar.GetEnergy().IsEmpty())
@@ -30,7 +35,7 @@ public class TemporalityChange : MonoBehaviour
                 SwitchTemporality();
             }
         }
-        if (isFuture)
+        else
         {
             energybar.RefillBar();
             if (Input.GetKeyDown(KeyCode.RightShift) && energybar.GetEnergy().TryChangeTemporality())
@@ -53,10 +58,15 @@ public class TemporalityChange : MonoBehaviour
 
     private void SwitchTemporality()
     {
-        futureTemporality.SetActive(isPast);
-        pastTemporality.SetActive(isFuture);
-
-        isFuture = futureTemporality.activeSelf;
-        isPast = pastTemporality.activeSelf;
+        if (isFuture)
+        {
+            cinemachineConfiner.m_BoundingShape2D = colliderPast;
+        }
+        else
+        {
+            cinemachineConfiner.m_BoundingShape2D = colliderFuture;
+        }
+        playerController.TeleportPlayer(isFuture);
+        isFuture = !isFuture;
     }
 }

@@ -109,6 +109,18 @@ public class PlayerController : MonoBehaviour
         isGrabbing = false;
     }
 
+    public void TeleportPlayer(bool isFuture)
+    {
+        if (isFuture)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y + 200);
+        }
+        else
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - 200);
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
