@@ -8,7 +8,7 @@ public class DeadZone : MonoBehaviour
     
     private void Awake()
     {
-        deadZonesController = GetComponentInParent<DeadZonesController>();
+        deadZonesController = transform.parent.gameObject.GetComponentInParent<DeadZonesController>();
     }
     
     private void OnTriggerEnter2D(Collider2D other)
