@@ -863,7 +863,6 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       herbe-present_8: 1976046624
-      herbe-present_22: 1915513415
       herbe-present_31: 1269634833
       herbe-present_23: 45366981
       herbe-present_2: -1425729578
@@ -895,6 +894,7 @@ TextureImporter:
       herbe-present_21: -1707640341
       herbe-present_33: 1562809381
       herbe-present_29: -135995065
+      herbe-present_22: 1915513415
       herbe-present_9: -1570505751
       herbe-present_1: 575159236
   spritePackingTag: 
