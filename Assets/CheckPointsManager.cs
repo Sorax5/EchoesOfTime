@@ -29,9 +29,12 @@ public class CheckPointsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Transform child in transform)
+        for (int i = 0; i < 2; i++)
         {
-            checkPoints.Add(child.GetComponent<CheckPoint>());
+            foreach (CheckPoint child in transform.GetChild(i).gameObject.GetComponentsInChildren<CheckPoint>())
+            {
+                checkPoints.Add(child);
+            }
         }
     }
     
