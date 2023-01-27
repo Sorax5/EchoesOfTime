@@ -20,9 +20,11 @@ public class PlayerController : MonoBehaviour
     private float startingGrav;
     public LayerMask groundMask;
 
-    private bool isGrabbing = false;
+    [SerializeField] private bool isGrabbing = false;
     
-    private bool isFacingRight = true;
+    [SerializeField] private bool isFacingRight = true;
+    
+    [SerializeField] private ParticleSystem dust;
 
     private void Awake()
     {
@@ -44,6 +46,12 @@ public class PlayerController : MonoBehaviour
         if (!isGrabbing)
         {
             this.horizontalInput = Input.GetAxisRaw("Horizontal");
+            
+            if (horizontalInput != 0 && jump)
+            {
+                dust.Stop();
+                CreateDust();
+            }
 
             if (Input.GetButtonDown("Jump") && jump)
             {
@@ -84,8 +92,6 @@ public class PlayerController : MonoBehaviour
             //calls the flip method
             flip();
         }
-        
-        
     }
 
     void FixedUpdate()
@@ -133,5 +139,10 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
         isFacingRight = !isFacingRight;
+    }
+    
+    private void CreateDust()
+    {
+        dust.Play();
     }
 }
