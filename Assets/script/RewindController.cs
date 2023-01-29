@@ -72,12 +72,10 @@ public class RewindController : Chronometer
         {
             // retrive GameObject of the slider component
             GameObject sliderObject = slider.gameObject;
-            sliderObject.SetActive(true);
         }
         else
         {
             GameObject sliderObject = slider.gameObject;
-            sliderObject.SetActive(false);
         }
     }
 
